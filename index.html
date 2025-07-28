@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قريبًا - Tashleehkom</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تشليحكم - قريبًا</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
-      padding-top: 100px;
     }
     h1 {
       font-size: 48px;
@@ -18,11 +24,44 @@
     }
     p {
       font-size: 20px;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+    #countdown {
+      font-size: 36px;
+      color: #00ff00; /* أخضر */
+      letter-spacing: 2px;
     }
   </style>
 </head>
 <body>
-  <h1>🚗 Tashleehkom</h1>
-  <p>نستعد للإطلاق قريبًا!<br>تابعنا لأفضل عروض قطع الغيار والتشليح.</p>
+  <h1>🚗 تشليحكم</h1>
+  <p>نستعد للإطلاق الكبير بعد سنة كاملة من الآن!</p>
+  <div id="countdown">00:00:00:00</div>
+
+  <script>
+    // التاريخ المستهدف: 28 يوليو 2026 - الساعة 00:00
+    const targetDate = new Date("2026-07-28T00:00:00").getTime();
+
+    const countdown = document.getElementById("countdown");
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        countdown.innerHTML = "🚀 انطلقنا!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `${days} يوم : ${hours} ساعة : ${minutes} دقيقة : ${seconds} ثانية`;
+    }, 1000);
+  </script>
 </body>
 </html>
