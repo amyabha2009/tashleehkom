@@ -27,8 +27,13 @@
       color: #ccc;
       margin-bottom: 20px;
     }
+    #days {
+      font-size: 48px;
+      color: #00ff00;
+      margin-bottom: 10px;
+    }
     #countdown {
-      font-size: 42px;
+      font-size: 36px;
       color: #00ff00;
       letter-spacing: 3px;
     }
@@ -37,6 +42,7 @@
 <body>
   <h1>تشليحكم</h1>
   <p>نستعد للإطلاق</p>
+  <div id="days">000</div>
   <div id="countdown">00:00:00</div>
 
   <script>
@@ -44,6 +50,7 @@
     const targetDate = new Date(now.getTime() + 175 * 24 * 60 * 60 * 1000);
 
     const countdown = document.getElementById("countdown");
+    const daysEl = document.getElementById("days");
 
     const interval = setInterval(() => {
       const current = new Date().getTime();
@@ -51,19 +58,22 @@
 
       if (distance < 0) {
         clearInterval(interval);
-        countdown.innerHTML = "🚀";
+        daysEl.innerHTML = "🚀";
+        countdown.innerHTML = "";
         return;
       }
 
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // تنسيق الأرقام إلى خانات ثنائية
+      const dd = days.toString().padStart(3, '0');
       const hh = hours.toString().padStart(2, '0');
       const mm = minutes.toString().padStart(2, '0');
       const ss = seconds.toString().padStart(2, '0');
 
+      daysEl.innerHTML = dd;
       countdown.innerHTML = `${hh}:${mm}:${ss}`;
     }, 1000);
   </script>
