@@ -41,13 +41,14 @@
 </head>
 <body>
   <h1>تشليحكم</h1>
-  <p>نستعد للإطلاق</p>
+  <p>صالحة ويارا وباسل ومالك وتميم ومحمد وياسر</p>
   <div id="days">000</div>
   <div id="countdown">00:00:00</div>
 
   <script>
     const now = new Date();
-    const targetDate = new Date(now.getTime() + 175 * 24 * 60 * 60 * 1000);
+    const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const targetDate = new Date(todayMidnight.getTime() + 175 * 24 * 60 * 60 * 1000);
 
     const countdown = document.getElementById("countdown");
     const daysEl = document.getElementById("days");
