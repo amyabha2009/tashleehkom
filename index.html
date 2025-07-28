@@ -27,38 +27,45 @@
       color: #ccc;
       margin-bottom: 20px;
     }
-    #days-only {
+    #countdown {
       font-size: 42px;
       color: #00ff00;
+      letter-spacing: 3px;
     }
   </style>
 </head>
 <body>
   <h1>تشليحكم</h1>
   <p>نستعد للإطلاق</p>
-  <div id="days-only">يتبقى 175 يوم</div>
+  <div id="countdown">00:00:00</div>
 
   <script>
     const now = new Date();
     const targetDate = new Date(now.getTime() + 175 * 24 * 60 * 60 * 1000);
 
-    const daysOnly = document.getElementById("days-only");
+    const countdown = document.getElementById("countdown");
 
-    function updateDaysLeft() {
+    const interval = setInterval(() => {
       const current = new Date().getTime();
       const distance = targetDate - current;
 
       if (distance < 0) {
-        daysOnly.innerHTML = "🚀 انطلقنا!";
+        clearInterval(interval);
+        countdown.innerHTML = "🚀";
         return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      daysOnly.innerHTML = `يتبقى ${days} يوم`;
-    }
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    updateDaysLeft();
-    setInterval(updateDaysLeft, 1000 * 60 * 60); // تحديث كل ساعة
+      // تنسيق الأرقام إلى خانات ثنائية
+      const hh = hours.toString().padStart(2, '0');
+      const mm = minutes.toString().padStart(2, '0');
+      const ss = seconds.toString().padStart(2, '0');
+
+      countdown.innerHTML = `${hh}:${mm}:${ss}`;
+    }, 1000);
   </script>
 </body>
 </html>
