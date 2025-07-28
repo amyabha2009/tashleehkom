@@ -25,49 +25,40 @@
     p {
       font-size: 20px;
       color: #ccc;
-      margin-bottom: 10px;
-    }
-    #days-left {
-      font-size: 24px;
-      color: #00ff00;
       margin-bottom: 20px;
     }
-    #countdown {
-      font-size: 32px;
+    #days-only {
+      font-size: 42px;
       color: #00ff00;
-      letter-spacing: 2px;
     }
   </style>
 </head>
 <body>
   <h1>تشليحكم</h1>
   <p>نستعد للإطلاق</p>
-  <div id="days-left">يتبقى 175 يوم</div>
-  <div id="countdown">00:00:00</div>
+  <div id="days-only">يتبقى 175 يوم</div>
 
   <script>
-    // حساب التاريخ بعد 175 يوم من الآن
     const now = new Date();
     const targetDate = new Date(now.getTime() + 175 * 24 * 60 * 60 * 1000);
 
-    const countdown = document.getElementById("countdown");
+    const daysOnly = document.getElementById("days-only");
 
-    const interval = setInterval(() => {
+    function updateDaysLeft() {
       const current = new Date().getTime();
       const distance = targetDate - current;
 
       if (distance < 0) {
-        clearInterval(interval);
-        countdown.innerHTML = "🚀 انطلقنا!";
+        daysOnly.innerHTML = "🚀 انطلقنا!";
         return;
       }
 
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      daysOnly.innerHTML = `يتبقى ${days} يوم`;
+    }
 
-      countdown.innerHTML = `${hours} ساعة : ${minutes} دقيقة : ${seconds} ثانية`;
-    }, 1000);
+    updateDaysLeft();
+    setInterval(updateDaysLeft, 1000 * 60 * 60); // تحديث كل ساعة
   </script>
 </body>
 </html>
