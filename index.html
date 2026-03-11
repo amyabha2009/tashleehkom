@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>تشليحكم - قريبًا</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 20px;
-      color: #ccc;
-      margin-bottom: 20px;
-    }
-    #days {
-      font-size: 48px;
-      color: #00ff00;
-      margin-bottom: 10px;
-    }
-    #countdown {
-      font-size: 36px;
-      color: #00ff00;
-      letter-spacing: 3px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>تشليحكم</title>
+
+<style>
+body{
+background:#0f172a;
+color:white;
+font-family:Arial;
+text-align:center;
+padding-top:100px;
+}
+
+h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+h2{
+font-size:28px;
+color:#38bdf8;
+margin-bottom:40px;
+}
+
+#countdown{
+font-size:35px;
+background:#1e293b;
+display:inline-block;
+padding:20px 40px;
+border-radius:15px;
+}
+</style>
 </head>
+
 <body>
-  <h1>تشليحكم</h1>
-  <p>استعدوا للانطلاق</p>
-  <div id="days">000</div>
-  <div id="countdown">00:00:00</div>
 
-  <script>
-    const now = new Date();
-    const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const targetDate = new Date(todayMidnight.getTime() + 175 * 24 * 60 * 60 * 1000);
+<h1>تشليحكم برعاية عبدالرحمن عبشان</h1>
+<h2>استعدوا للإنطلاق 🚀</h2>
 
-    const countdown = document.getElementById("countdown");
-    const daysEl = document.getElementById("days");
+<div id="countdown">
+<span id="days"></span> يوم
+<span id="hours"></span> ساعة
+<span id="minutes"></span> دقيقة
+<span id="seconds"></span> ثانية
+</div>
 
-    const interval = setInterval(() => {
-      const current = new Date().getTime();
-      const distance = targetDate - current;
+<script>
 
-      if (distance < 0) {
-        clearInterval(interval);
-        daysEl.innerHTML = "🚀";
-        countdown.innerHTML = "";
-        return;
-      }
+// تاريخ الانطلاق (غيره إذا حبيت)
+var launchDate = new Date("Apr 1, 2026 00:00:00").getTime();
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+var x = setInterval(function(){
 
-      const dd = days.toString().padStart(3, '0');
-      const hh = hours.toString().padStart(2, '0');
-      const mm = minutes.toString().padStart(2, '0');
-      const ss = seconds.toString().padStart(2, '0');
+var now = new Date().getTime();
+var distance = launchDate - now;
 
-      daysEl.innerHTML = dd;
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("days").innerHTML = days;
+document.getElementById("hours").innerHTML = hours;
+document.getElementById("minutes").innerHTML = minutes;
+document.getElementById("seconds").innerHTML = seconds;
+
+if (distance < 0) {
+clearInterval(x);
+document.getElementById("countdown").innerHTML = "تم الإنطلاق 🚀";
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>
       countdown.innerHTML = `${hh}:${mm}:${ss}`;
     }, 1000);
   </script>
