@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[5:28 PM, 3/11/2026] Me: <!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -75,6 +75,125 @@ document.getElementById("seconds").innerHTML = seconds;
 
 if(distance < 0){
 document.getElementById("countdown").innerHTML = "🚀 تم الإنطلاق";
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>
+[5:38 PM, 3/11/2026] Me: <!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تشليحكم</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle at top,#1e3a8a,#020617);
+font-family:'Cairo',sans-serif;
+color:white;
+text-align:center;
+}
+
+h1{
+font-size:50px;
+margin-bottom:10px;
+}
+
+h2{
+font-size:28px;
+color:#38bdf8;
+margin-bottom:60px;
+}
+
+.timer{
+display:flex;
+gap:20px;
+}
+
+.box{
+background:#0f172a;
+padding:25px 35px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+.number{
+font-size:42px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>تشليحكم</h1>
+<h2>انتظرونا قريبًا</h2>
+
+<div class="timer">
+
+<div class="box">
+<div id="days" class="number">0</div>
+</div>
+
+<div class="box">
+<div id="hours" class="number">0</div>
+</div>
+
+<div class="box">
+<div id="minutes" class="number">0</div>
+</div>
+
+<div class="box">
+<div id="seconds" class="number">0</div>
+</div>
+
+</div>
+
+<script>
+
+let start = localStorage.getItem("startDate");
+
+if(!start){
+start = new Date().getTime();
+localStorage.setItem("startDate", start);
+}
+
+start = parseInt(start);
+
+// 6 أشهر (180 يوم)
+let launchDate = start + (180 * 24 * 60 * 60 * 1000);
+
+setInterval(function(){
+
+let now = new Date().getTime();
+let distance = launchDate - now;
+
+let days = Math.floor(distance/(1000*60*60*24));
+let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").innerHTML = days;
+document.getElementById("hours").innerHTML = hours;
+document.getElementById("minutes").innerHTML = minutes;
+document.getElementById("seconds").innerHTML = seconds;
+
+if(distance < 0){
+document.querySelector(".timer").innerHTML = "تم الإطلاق";
 }
 
 },1000);
