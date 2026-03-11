@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تشليحكم - قريبًا</title>
+
   <style>
     body {
       margin: 0;
@@ -18,60 +19,86 @@
       height: 100vh;
       text-align: center;
     }
+
     h1 {
       font-size: 48px;
       margin-bottom: 10px;
     }
+
     p {
       font-size: 20px;
       color: #ccc;
       margin-bottom: 20px;
     }
+
     #days {
       font-size: 48px;
       color: #00ff00;
       margin-bottom: 10px;
     }
+
     #countdown {
       font-size: 36px;
       color: #00ff00;
       letter-spacing: 3px;
     }
   </style>
+
 </head>
+
 <body>
-  <h1>تشليحكم</h1>
-  <p>استعدوا للانطلاق</p>
-  <div id="days">000</div>
-  <div id="countdown">00:00:00</div>
 
-  <script>
-    const now = new Date();
-    const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const targetDate = new Date(todayMidnight.getTime() + 175 * 24 * 60 * 60 * 1000);
+<h1>تشليحكم</h1>
+<p>استعدوا للانطلاق</p>
 
-    const countdown = document.getElementById("countdown");
-    const daysEl = document.getElementById("days");
+<div id="days">000</div>
+<div id="countdown">00:00:00</div>
 
-    const interval = setInterval(() => {
-      const current = new Date().getTime();
-      const distance = targetDate - current;
+<script>
 
-      if (distance < 0) {
-        clearInterval(interval);
-        daysEl.innerHTML = "🚀";
-        countdown.innerHTML = "";
-        return;
-      }
+let startDate = localStorage.getItem("startDate");
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+if (!startDate) {
+  startDate = new Date().getTime();
+  localStorage.setItem("startDate", startDate);
+}
 
-      const dd = days.toString().padStart(3, '0');
-      const hh = hours.toString().padStart(2, '0');
-      const mm = minutes.toString().padStart(2, '0');
-      const ss = seconds.toString().padStart(2, '0');
+startDate = parseInt(startDate);
 
-      daysEl.innerHTML = dd;
+// 175 يوم
+const targetDate = startDate + (175 * 24 * 60 * 60 * 1000);
+
+const countdown = document.getElementById("countdown");
+const daysEl = document.getElementById("days");
+
+const interval = setInterval(() => {
+
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance < 0) {
+    clearInterval(interval);
+    daysEl.innerHTML = "🚀";
+    countdown.innerHTML = "";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
+
+  const dd = days.toString().padStart(3,'0');
+  const hh = hours.toString().padStart(2,'0');
+  const mm = minutes.toString().padStart(2,'0');
+  const ss = seconds.toString().padStart(2,'0');
+
+  daysEl.innerHTML = dd;
+  countdown.innerHTML = ${hh}:${mm}:${ss};
+
+},1000);
+
+</script>
+
+</body>
+</html>
