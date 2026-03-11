@@ -5,39 +5,47 @@
 <title>تشليحكم</title>
 
 <style>
+
 body{
-background:#0f172a;
+background:linear-gradient(135deg,#0f172a,#020617);
 color:white;
-font-family:Arial;
+font-family:Tahoma;
 text-align:center;
-padding-top:100px;
+padding-top:120px;
 }
 
 h1{
-font-size:40px;
+font-size:42px;
 margin-bottom:10px;
 }
 
 h2{
-font-size:28px;
 color:#38bdf8;
-margin-bottom:40px;
+font-size:28px;
+margin-bottom:50px;
 }
 
 #countdown{
-font-size:35px;
+font-size:40px;
 background:#1e293b;
 display:inline-block;
-padding:20px 40px;
+padding:25px 50px;
 border-radius:15px;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
+
+span{
+margin:10px;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <h1>تشليحكم برعاية عبدالرحمن عبشان</h1>
-<h2>استعدوا للإنطلاق 🚀</h2>
+<h2>🚀 استعدوا للإنطلاق</h2>
 
 <div id="countdown">
 <span id="days"></span> يوم
@@ -48,37 +56,30 @@ border-radius:15px;
 
 <script>
 
-// تاريخ الانطلاق (غيره إذا حبيت)
 var launchDate = new Date("Apr 1, 2026 00:00:00").getTime();
 
-var x = setInterval(function(){
+setInterval(function(){
 
 var now = new Date().getTime();
 var distance = launchDate - now;
 
-var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+var days = Math.floor(distance / (1000*60*60*24));
+var hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+var minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+var seconds = Math.floor((distance % (1000*60))/1000);
 
 document.getElementById("days").innerHTML = days;
 document.getElementById("hours").innerHTML = hours;
 document.getElementById("minutes").innerHTML = minutes;
 document.getElementById("seconds").innerHTML = seconds;
 
-if (distance < 0) {
-clearInterval(x);
-document.getElementById("countdown").innerHTML = "تم الإنطلاق 🚀";
+if(distance < 0){
+document.getElementById("countdown").innerHTML = "🚀 تم الإنطلاق";
 }
 
 },1000);
 
 </script>
 
-</body>
-</html>
-      countdown.innerHTML = `${hh}:${mm}:${ss}`;
-    }, 1000);
-  </script>
 </body>
 </html>
